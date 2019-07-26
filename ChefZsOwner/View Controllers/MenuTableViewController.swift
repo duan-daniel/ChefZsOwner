@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class MenuTableViewController: UITableViewController {
     
-    var dishesArray: [String] = []
+    var dishArray = [Dish]()
+    var db: Firestore!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +20,8 @@ class MenuTableViewController: UITableViewController {
         // TODO: Call some sort of load dishes on this line
         tableView.rowHeight = 140
         tableView.separatorStyle = .none
+        
+        db = Firestore.firestore()
         
     }
     
@@ -54,9 +58,24 @@ class MenuTableViewController: UITableViewController {
         // Make pretty
         cell.viewOfContent.layer.cornerRadius = 10
         cell.viewOfContent.layer.masksToBounds = true
-        cell.selectButton.layer.cornerRadius = 10
 
         return cell
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {        
+        guard let identifier = segue.identifier else { return }
+        
+        if identifier == "updateDish" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let destination = segue.destination as! UpdateDishViewController
+            
+            let dishToUpdate = dishArray[indexPath.row]
+            destination.dish = dishToUpdate
+            
+        }
     }
     
 
@@ -94,15 +113,6 @@ class MenuTableViewController: UITableViewController {
         return true
     }
     */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
 
 }

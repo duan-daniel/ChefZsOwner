@@ -12,7 +12,6 @@ class MenuTableViewCell: UITableViewCell {
 
     @IBOutlet weak var viewOfContent: UIView!
     @IBOutlet weak var dishLabel: UILabel!
-    @IBOutlet weak var selectButton: UIButton!
     
 //    override func awakeFromNib() {
 //        super.awakeFromNib()

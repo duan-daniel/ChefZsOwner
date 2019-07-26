@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		4FF3EAF6ADD886BA39AD988C /* Pods_ChefZsOwner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 748BDEA4F5EDB22B2D5D412F /* Pods_ChefZsOwner.framework */; };
+		A415ECFF22E95DE20057DB51 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = A415ECFE22E95DE20057DB51 /* Dish.swift */; };
 		A41F7E2822E51A630076E951 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41F7E2722E51A630076E951 /* CreateAccountViewController.swift */; };
 		A4469C1722E17F3B00EED291 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A4469C1622E17F3B00EED291 /* GoogleService-Info.plist */; };
 		A45F261522E6AD9B00FAA100 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45F261422E6AD9B00FAA100 /* MenuTableViewController.swift */; };
 		A45F261822E6AF6700FAA100 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45F261722E6AF6700FAA100 /* HeaderTableViewCell.swift */; };
 		A45F261A22E6B1DF00FAA100 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45F261922E6B1DF00FAA100 /* MenuTableViewCell.swift */; };
+		A47B0F7D22EA9EBE00BB94B6 /* UpdateDishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47B0F7C22EA9EBE00BB94B6 /* UpdateDishViewController.swift */; };
 		A4B14EC522E17E0500A74387 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B14EC422E17E0500A74387 /* AppDelegate.swift */; };
 		A4B14EC722E17E0500A74387 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B14EC622E17E0500A74387 /* LoginViewController.swift */; };
 		A4B14ECA22E17E0500A74387 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4B14EC822E17E0500A74387 /* Main.storyboard */; };
@@ -23,11 +25,13 @@
 /* Begin PBXFileReference section */
 		618F66772FF2FEF546A66CE2 /* Pods-ChefZsOwner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChefZsOwner.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChefZsOwner/Pods-ChefZsOwner.release.xcconfig"; sourceTree = "<group>"; };
 		748BDEA4F5EDB22B2D5D412F /* Pods_ChefZsOwner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChefZsOwner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A415ECFE22E95DE20057DB51 /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		A41F7E2722E51A630076E951 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		A4469C1622E17F3B00EED291 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A45F261422E6AD9B00FAA100 /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		A45F261722E6AF6700FAA100 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		A45F261922E6B1DF00FAA100 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		A47B0F7C22EA9EBE00BB94B6 /* UpdateDishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDishViewController.swift; sourceTree = "<group>"; };
 		A4B14EC122E17E0500A74387 /* ChefZsOwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChefZsOwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4B14EC422E17E0500A74387 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4B14EC622E17E0500A74387 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -67,12 +71,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A415ECFD22E95DC20057DB51 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				A415ECFE22E95DE20057DB51 /* Dish.swift */,
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
 		A41F7E2522E515650076E951 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				A4B14EC622E17E0500A74387 /* LoginViewController.swift */,
 				A41F7E2722E51A630076E951 /* CreateAccountViewController.swift */,
 				A45F261422E6AD9B00FAA100 /* MenuTableViewController.swift */,
+				A47B0F7C22EA9EBE00BB94B6 /* UpdateDishViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -117,6 +130,7 @@
 		A4B14EC322E17E0500A74387 /* ChefZsOwner */ = {
 			isa = PBXGroup;
 			children = (
+				A415ECFD22E95DC20057DB51 /* Data Models */,
 				A45F261622E6AF4C00FAA100 /* Table View Cells */,
 				A41F7E2622E515910076E951 /* Supporting Files */,
 				A41F7E2522E515650076E951 /* View Controllers */,
@@ -268,6 +282,8 @@
 			files = (
 				A45F261522E6AD9B00FAA100 /* MenuTableViewController.swift in Sources */,
 				A45F261822E6AF6700FAA100 /* HeaderTableViewCell.swift in Sources */,
+				A415ECFF22E95DE20057DB51 /* Dish.swift in Sources */,
+				A47B0F7D22EA9EBE00BB94B6 /* UpdateDishViewController.swift in Sources */,
 				A45F261A22E6B1DF00FAA100 /* MenuTableViewCell.swift in Sources */,
 				A41F7E2822E51A630076E951 /* CreateAccountViewController.swift in Sources */,
 				A4B14EC722E17E0500A74387 /* LoginViewController.swift in Sources */,

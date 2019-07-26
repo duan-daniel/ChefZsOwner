@@ -1,0 +1,47 @@
+//
+//  Dish.swift
+//  ChefZsOwner
+//
+//  Created by Daniel Duan on 7/24/19.
+//  Copyright © 2019 Daniel Duan. All rights reserved.
+//
+
+import Foundation
+import FirebaseFirestore
+
+protocol DocumentSerializable {
+    init?(dictionary:[String:Any])
+}
+
+struct Dish {
+    var name: String
+    var date: Date
+    var totalCount: [String]
+    var mediumCount: [String]
+    var largeCount: [String]
+    var schools: [String: [String]]
+    
+    var dictionary:[String:Any] {
+        return [
+            "name":name,
+            "date":date,
+            "totalCount":totalCount,
+            "mediumCount":mediumCount,
+            "largeCount":largeCount,
+            "schools":schools
+        ]
+    }
+}
+
+extension Dish : DocumentSerializable {
+    init?(dictionary: [String : Any]) {
+        guard let name = dictionary["name"] as? String,
+            let date = dictionary["date"] as? Date,
+            let totalCount = dictionary["totalCount"] as? [String],
+            let mediumCount = dictionary["mediumCount"] as? [String],
+            let largeCount = dictionary["largeCount"] as? [String],
+            let schools = dictionary["schools"] as? [String: [String]] else {return nil}
+        
+        self.init(name: name, date: date, totalCount: totalCount, mediumCount: mediumCount, largeCount: largeCount, schools: schools)
+    }
+}
