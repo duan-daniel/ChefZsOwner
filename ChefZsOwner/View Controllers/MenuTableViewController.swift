@@ -69,11 +69,32 @@ class MenuTableViewController: UITableViewController {
         guard let identifier = segue.identifier else { return }
         
         if identifier == "updateDish" {
-            guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            let destination = segue.destination as! UpdateDishViewController
             
-            let dishToUpdate = dishArray[indexPath.row]
-            destination.dish = dishToUpdate
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            
+//            if indexPath.section == 0 {
+//                print("updating a monday dish")
+//                // pass in indexPath.section and indexPath into destination vc?
+//            }
+//            else if indexPath.section == 1 {
+//                print("updating a tuesday dish")
+//            }
+//            else if indexPath.section == 2 {
+//                print("updating a wednesday dish")
+//            }
+//            else if indexPath.section == 3 {
+//                print("updating a thursday dish")
+//            }
+//            else if indexPath.section == 2 {
+//                print("updating a friday dish")
+//            }
+            
+            let destination = segue.destination as! UpdateDishViewController
+            destination.sectionIndex = indexPath.section
+            destination.rowIndex = indexPath.row
+            
+//            let dishToUpdate = dishArray[indexPath.row]
+//            destination.dish = dishToUpdate
             
         }
     }

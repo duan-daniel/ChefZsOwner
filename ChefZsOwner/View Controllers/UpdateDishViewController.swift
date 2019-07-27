@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class UpdateDishViewController: UIViewController, UITextFieldDelegate {
     
     var dish: Dish!
+    var sectionIndex = 0
+    var rowIndex = 0
+    var documentName = ""
+    var dishName = ""
+    var date = ""
+    
+    var db: Firestore!
     
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -22,6 +30,25 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        db = Firestore.firestore()
+        
+        // sets the document name
+        switch sectionIndex {
+        case 0:
+            documentName = "mondayDish\(rowIndex)"
+        case 1:
+            documentName = "tuesdayDish\(rowIndex)"
+        case 2:
+            documentName = "wednesdayDish\(rowIndex)"
+        case 3:
+            documentName = "thursdayDish\(rowIndex)"
+        case 4:
+            documentName = "fridayDish\(rowIndex)"
+        default:
+            print("this should not be printing")
+        }
+        
         // creates date picker and toolbar
         createDatePicker()
         
@@ -82,9 +109,28 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func updateButtonPressed(_ sender: UIButton) {
-        //TODO: Create dishes collection here
-        //TODO: pop this vc
-        print("update button tapped")
+        
+        
+        
+        dishName = dishNameTextField.text!
+        date = dateTextField.text!
+        
+        // write to firebase
+        
+        let newDish = Dish(name: dishName, date: date, totalCount: [], mediumCount: [], largeCount: [], schools: [:])
+        
+        db.collection("dishes").document(documentName).setData(newDish.dictionary) {
+            error in
+            
+            if let error = error {
+                print("error adding document: \(error)")
+            } else {
+                print("document added!")
+            }
+        }
+        
+        // pop the view controller
+        navigationController?.popViewController(animated: true)
     }
     
     /*
