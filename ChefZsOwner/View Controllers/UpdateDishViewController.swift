@@ -11,17 +11,15 @@ import FirebaseFirestore
 
 class UpdateDishViewController: UIViewController, UITextFieldDelegate {
     
+    // variables passed in from MenuTableViewController
     var dish: Dish!
     var sectionIndex = 0
     var rowIndex = 0
-    var documentName = ""
-    var dishName = ""
-    var date = ""
     
+    // Firestore reference
     var db: Firestore!
     
     @IBOutlet weak var dateLabel: UILabel!
-    
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var dishNameLabel: UILabel!
     @IBOutlet weak var dishNameTextField: UITextField!
@@ -32,30 +30,37 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         db = Firestore.firestore()
+        setUpViews()
         
-        // sets the document name
-        switch sectionIndex {
-        case 0:
-            documentName = "mondayDish\(rowIndex)"
-        case 1:
-            documentName = "tuesdayDish\(rowIndex)"
-        case 2:
-            documentName = "wednesdayDish\(rowIndex)"
-        case 3:
-            documentName = "thursdayDish\(rowIndex)"
-        case 4:
-            documentName = "fridayDish\(rowIndex)"
-        default:
-            print("this should not be printing")
-        }
+    }
+    
+    func setUpViews() {
         
         // creates date picker and toolbar
         createDatePicker()
         
-        // Disable Sign In Button until all Text Fields are filled in
+        // disables buttons until text fields are filled in
         configureTextFields()
         updateTextFields()
-
+        
+        // sets navigation title
+        switch sectionIndex {
+        case 0:
+            self.navigationItem.title = "Monday"
+        case 1:
+            self.navigationItem.title = "Tuesday"
+        case 2:
+            self.navigationItem.title = "Wednesday"
+        case 3:
+            self.navigationItem.title = "Thursday"
+        case 4:
+            self.navigationItem.title = "Friday"
+        default:
+            print("this should not be printing")
+        }
+        
+        dateTextField.text = dish.date
+        dishNameTextField.text = dish.name
     }
     
     func createDatePicker() {
@@ -110,16 +115,30 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func updateButtonPressed(_ sender: UIButton) {
         
-        
-        
-        dishName = dishNameTextField.text!
-        date = dateTextField.text!
+        // assign values
+        var documentName = ""
+        switch sectionIndex {
+        case 0:
+            documentName = "mondayDish\(rowIndex)"
+        case 1:
+            documentName = "tuesdayDish\(rowIndex)"
+        case 2:
+            documentName = "wednesdayDish\(rowIndex)"
+        case 3:
+            documentName = "thursdayDish\(rowIndex)"
+        case 4:
+            documentName = "fridayDish\(rowIndex)"
+        default:
+            print("this should not be printing")
+        }
+
+        let dishName = dishNameTextField.text!
+        let date = dateTextField.text!
         
         // write to firebase
+        let newDish = Dish(name: dishName, date: date, id: documentName, totalCount: [], mediumCount: [], largeCount: [], schools: [:])
         
-        let newDish = Dish(name: dishName, date: date, totalCount: [], mediumCount: [], largeCount: [], schools: [:])
-        
-        db.collection("dishes").document(documentName).setData(newDish.dictionary) {
+        db.collection("foods").document(documentName).setData(newDish.dictionary) {
             error in
             
             if let error = error {
@@ -132,15 +151,5 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
         // pop the view controller
         navigationController?.popViewController(animated: true)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

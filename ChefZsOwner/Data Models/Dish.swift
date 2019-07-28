@@ -16,6 +16,7 @@ protocol DocumentSerializable {
 struct Dish {
     var name: String
     var date: String
+    var id: String
     var totalCount: [String]
     var mediumCount: [String]
     var largeCount: [String]
@@ -25,6 +26,7 @@ struct Dish {
         return [
             "name":name,
             "date":date,
+            "id":id,
             "totalCount":totalCount,
             "mediumCount":mediumCount,
             "largeCount":largeCount,
@@ -37,11 +39,12 @@ extension Dish : DocumentSerializable {
     init?(dictionary: [String : Any]) {
         guard let name = dictionary["name"] as? String,
             let date = dictionary["date"] as? String,
+            let id = dictionary["id"] as? String,
             let totalCount = dictionary["totalCount"] as? [String],
             let mediumCount = dictionary["mediumCount"] as? [String],
             let largeCount = dictionary["largeCount"] as? [String],
             let schools = dictionary["schools"] as? [String: [String]] else {return nil}
         
-        self.init(name: name, date: date, totalCount: totalCount, mediumCount: mediumCount, largeCount: largeCount, schools: schools)
+        self.init(name: name, date: date, id: id, totalCount: totalCount, mediumCount: mediumCount, largeCount: largeCount, schools: schools)
     }
 }
