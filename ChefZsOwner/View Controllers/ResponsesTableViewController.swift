@@ -1,15 +1,15 @@
 //
-//  MenuTableViewController.swift
+//  ResponsesTableViewController.swift
 //  ChefZsOwner
 //
-//  Created by Daniel Duan on 7/22/19.
+//  Created by Daniel Duan on 8/11/19.
 //  Copyright © 2019 Daniel Duan. All rights reserved.
 //
 
 import UIKit
 import FirebaseFirestore
 
-class MenuTableViewController: UITableViewController {
+class ResponsesTableViewController: UITableViewController {
     
     var dishArray: [Dish] = []
     var mondayDishArray = [Dish]()
@@ -21,7 +21,7 @@ class MenuTableViewController: UITableViewController {
     // Firebase Reading Variables
     var documents: [DocumentSnapshot] = []
     var listener: ListenerRegistration!
-
+    
     // MARK: - Read from Firestore
     fileprivate var query: Query? {
         didSet {
@@ -30,19 +30,21 @@ class MenuTableViewController: UITableViewController {
             }
         }
     }
-
+    
     fileprivate func baseQuery() -> Query {
         return Firestore.firestore().collection("foods")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.rowHeight = 90
+        tableView.rowHeight = 95
         tableView.separatorStyle = .none
         
         self.query = baseQuery()
     }
+    
+    // MARK: Load Data
     
     override func viewWillAppear(_ animated: Bool) {
         self.listener =  query?.addSnapshotListener { (documents, error) in
@@ -105,10 +107,11 @@ class MenuTableViewController: UITableViewController {
         super.viewWillDisappear(animated)
         self.listener.remove()
     }
+
+    // MARK: - Table view Header data source
     
-    // MARK: - Header Table View Data Source
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "responsesHeaderCell") as! ResponsesHeaderTableViewCell
         if (dishArray.count != 0) {
             let mondayHeader = "Monday | \(mondayDishArray[0].date)"
             let tuesdayHeader = "Tuesday | \(tuesdayDishArray[0].date)"
@@ -116,7 +119,7 @@ class MenuTableViewController: UITableViewController {
             let thursdayHeader = "Thursday | \(thursdayDishArray[0].date)"
             let fridayHeader = "Friday | \(fridayDishArray[0].date)"
             let sections = [mondayHeader, tuesdayHeader, wednesdayHeader, thursdayHeader, fridayHeader]
-            cell.headerLabel.text = sections[section]
+            cell.dateLabel.text = sections[section]
         }
         return cell
     }
@@ -125,67 +128,68 @@ class MenuTableViewController: UITableViewController {
         return 55
     }
 
-    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 5
     }
+    
+    // MARK: - Table View Data Source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return mondayDishArray.count
-        case 1:
-            return tuesdayDishArray.count
-        case 2:
-            return wednesdayDishArray.count
-        case 3:
-            return thursdayDishArray.count
-        default:
-            return fridayDishArray.count
-        }
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "menuCell", for: indexPath) as! MenuTableViewCell
-        
-        // Make pretty
+        let cell = tableView.dequeueReusableCell(withIdentifier: "responsesCell", for: indexPath) as! ResponsesTableViewCell
+
         cell.viewOfContent.layer.cornerRadius = 10
         cell.viewOfContent.layer.masksToBounds = true
+        
         
         if dishArray.count != 0 {
             switch indexPath.section {
             case 0:
                 let dish = mondayDishArray[indexPath.row]
-                cell.dishLabel.text = dish.name
+                cell.dishNameLabel.text = dish.name
+                cell.largeCountLabel.text = "\(dish.largeCount.count) Larges"
+                cell.mediumCountLabel.text = "\(dish.mediumCount.count) Mediums"
             case 1:
                 let dish = tuesdayDishArray[indexPath.row]
-                cell.dishLabel.text = dish.name
+                cell.dishNameLabel.text = dish.name
+                cell.largeCountLabel.text = "\(dish.largeCount.count) Larges"
+                cell.mediumCountLabel.text = "\(dish.mediumCount.count) Mediums"
+
             case 2:
                 let dish = wednesdayDishArray[indexPath.row]
-                cell.dishLabel.text = dish.name
+                cell.dishNameLabel.text = dish.name
+                cell.largeCountLabel.text = "\(dish.largeCount.count) Larges"
+                cell.mediumCountLabel.text = "\(dish.mediumCount.count) Mediums"
             case 3:
                 let dish = thursdayDishArray[indexPath.row]
-                cell.dishLabel.text = dish.name
+                cell.dishNameLabel.text = dish.name
+                cell.largeCountLabel.text = "\(dish.largeCount.count) Larges"
+                cell.mediumCountLabel.text = "\(dish.mediumCount.count) Mediums"
             default:
                 let dish = fridayDishArray[indexPath.row]
-                cell.dishLabel.text = dish.name
+                cell.dishNameLabel.text = dish.name
+                cell.largeCountLabel.text = "\(dish.largeCount.count) Larges"
+                cell.mediumCountLabel.text = "\(dish.mediumCount.count) Mediums"
+
             }
         }
-
+        
         return cell
     }
     
+
     // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
         
-        if identifier == "updateDish" {
+        if identifier == "goToDetailedViewController" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            let destination = segue.destination as! UpdateDishViewController
-            destination.sectionIndex = indexPath.section
-            destination.rowIndex = indexPath.row
+            let destination = segue.destination as! ResponsesDetailedTableViewController
+//            destination.sectionIndex = indexPath.section
+//            destination.rowIndex = indexPath.row
             
             switch indexPath.section {
             case 0:
@@ -203,5 +207,9 @@ class MenuTableViewController: UITableViewController {
             }
         }
     }
+    
 
 }
+
+
+// responsesHeaderCell

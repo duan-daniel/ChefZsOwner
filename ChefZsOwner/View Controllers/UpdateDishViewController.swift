@@ -134,9 +134,25 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
 
         let dishName = dishNameTextField.text!
         let date = dateTextField.text!
+        var schools = [String: [String]]()
+        schools = ["CMSMedium": [],
+                   "CMSLarge": [],
+                   "MillerMedium": [],
+                   "MillerLarge": [],
+                   "MVHSMedium": [],
+                   "MVHSLarge": [],
+                   "LynbrookMedium": [],
+                   "LynbrookLarge": [],
+                   "CHSMedium": [],
+                   "CHSLarge": [],
+                   "HydeMedium": [],
+                   "HydeLarge": [],
+                   "HHSMedium": [],
+                   "HHSLarge": []]
+        
         
         // write to firebase
-        let newDish = Dish(name: dishName, date: date, id: documentName, totalCount: [], mediumCount: [], largeCount: [], schools: [:])
+        let newDish = Dish(name: dishName, date: date, id: documentName, totalCount: [], mediumCount: [], largeCount: [], schools: schools)
         
         db.collection("foods").document(documentName).setData(newDish.dictionary) {
             error in
