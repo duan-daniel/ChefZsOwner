@@ -1,0 +1,6 @@
+framework module Pods_ChefZsOwner {
+  umbrella header "Pods-ChefZsOwner-umbrella.h"
+
+  export *
+  module * { export * }
+}
