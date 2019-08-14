@@ -150,29 +150,29 @@ class ResponsesTableViewController: UITableViewController {
             case 0:
                 let dish = mondayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
-                cell.largeCountLabel.text = "\(dish.largeCount.count) Larges"
-                cell.mediumCountLabel.text = "\(dish.mediumCount.count) Mediums"
+                cell.largeCountLabel.text = "\(dish.largeCount.count) L"
+                cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
             case 1:
                 let dish = tuesdayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
-                cell.largeCountLabel.text = "\(dish.largeCount.count) Larges"
-                cell.mediumCountLabel.text = "\(dish.mediumCount.count) Mediums"
+                cell.largeCountLabel.text = "\(dish.largeCount.count) L"
+                cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
 
             case 2:
                 let dish = wednesdayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
-                cell.largeCountLabel.text = "\(dish.largeCount.count) Larges"
-                cell.mediumCountLabel.text = "\(dish.mediumCount.count) Mediums"
+                cell.largeCountLabel.text = "\(dish.largeCount.count) L"
+                cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
             case 3:
                 let dish = thursdayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
-                cell.largeCountLabel.text = "\(dish.largeCount.count) Larges"
-                cell.mediumCountLabel.text = "\(dish.mediumCount.count) Mediums"
+                cell.largeCountLabel.text = "\(dish.largeCount.count) L"
+                cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
             default:
                 let dish = fridayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
-                cell.largeCountLabel.text = "\(dish.largeCount.count) Larges"
-                cell.mediumCountLabel.text = "\(dish.mediumCount.count) Mediums"
+                cell.largeCountLabel.text = "\(dish.largeCount.count) L"
+                cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
 
             }
         }

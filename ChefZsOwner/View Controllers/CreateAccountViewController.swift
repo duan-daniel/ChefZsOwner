@@ -74,15 +74,20 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {
         // register user with Firebase
         Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
-            if user != nil {
-                // go to home screen
-                self.performSegue(withIdentifier: "goToMenuFromCreateAccount", sender: self)
-                print("user signed up!")
+            if error != nil {
+                let alert = UIAlertController(title: "Sign In Failed",
+                                              message: error?.localizedDescription,
+                                              preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                
+                self.present(alert, animated: true, completion: nil)
             }
             else {
-                //TODO: Email already taken error
-                print("error is found")
+                Auth.auth().signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!)
+                self.performSegue(withIdentifier: "goToHomeFromSignUp", sender: self)
             }
+            
         }
     }
     

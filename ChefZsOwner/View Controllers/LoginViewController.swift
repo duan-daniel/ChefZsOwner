@@ -20,6 +20,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        authenticateUser()
+        
         // Round button corners
         signInButton.layer.cornerRadius = 20
         createAccountButton.layer.cornerRadius = 20
@@ -36,6 +38,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Disable Sign In Button until all Text Fields are filled in
         configureTextFields()
         updateTextField()
+    }
+    
+    // MARK: - See if user is previously signed in
+    func authenticateUser() {
+        let handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            if ((user) != nil) {
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "goToMenuFromSignIn", sender: self)
+                }
+            }
+            else {
+                print("no user is signed in")
+            }
+        }
     }
     
     // MARK: - Disable Button
@@ -72,19 +88,36 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func signInButtonTapped(_ sender: UIButton) {
         // sign in user with Firebase
-        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
-            if user != nil {
-                // go to home screen
-                self.performSegue(withIdentifier: "goToMenuFromSignIn", sender: self)
-                print("user signed in!")
-            }
-            else {
+        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
+            
+            //            if let error = error, user == nil {
+            //                let alert = UIAlertController(title: "Sign In Failed",
+            //                                              message: error.localizedDescription,
+            //                                              preferredStyle: .alert)
+            //
+            //                alert.addAction(UIAlertAction(title: "OK", style: .default))
+            //
+            //                self.present(alert, animated: true, completion: nil)
+            //            }
+            
+            if error != nil {
+                let alert = UIAlertController(title: "Sign In Failed",
+                                              message: error?.localizedDescription,
+                                              preferredStyle: .alert)
                 
-                //TODO: Let users know that the password is incorrect
-                //TODO: Add loading animation
-                print("error found")
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                
+                self.present(alert, animated: true, completion: nil)
+                //                print(error!.localizedDescription)
+                //                print(error!._code)
+                //                self.handleError(error!)      // use the handleError method
+                //                return
             }
-        }
+            //            else if user != nil {
+            //                // successfully logged in—go to home screen
+            //                self.performSegue(withIdentifier: "goToHomeFromSignIn", sender: self)
+            //            }
+        })
     }
     
     @IBAction func createAccountButtonTapped(_ sender: UIButton) {

@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
 
 class MenuTableViewController: UITableViewController {
     
@@ -203,5 +204,24 @@ class MenuTableViewController: UITableViewController {
             }
         }
     }
+    
+    @IBAction func signOutButtonTapped(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: nil, message: "Are you sure you want to sign out?", preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Sign Out", style: .destructive, handler: { (_) in
+            self.signOut()
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        } catch let error {
+            print("failed to sign out with error..", error)
+        }
+    }
+    
 
 }

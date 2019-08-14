@@ -15,17 +15,26 @@ class ResponsesDetailedTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationItem.title = dish.name
+        tableView.rowHeight = 75
         tableView.separatorStyle = .none
-        tableView.rowHeight = 85
+        self.navigationItem.title = dish.name
         
     }
     
     // MARK: - Section Data Source
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 90
+        return 50
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "responsesDetailedFooterCell") as! ResponsesDetailedFooterTableViewCell
+        cell.backgroundColor = #colorLiteral(red: 0.3411764706, green: 0.3960784314, blue: 0.462745098, alpha: 1)
+        return cell
     }
     
     
@@ -44,38 +53,38 @@ class ResponsesDetailedTableViewController: UITableViewController {
         case 0:
             // CHS Section
             schoolText = "CHS"
-            largeSizeText = ("\(dish.schools["CHSLarge"]!.count) Larges")
-            mediumSizeText = ("\(dish.schools["CHSMedium"]!.count) Mediums")
+            largeSizeText = ("\(dish.schools["CHSLarge"]!.count) L")
+            mediumSizeText = ("\(dish.schools["CHSMedium"]!.count) M")
         case 1:
             // CMS Section
             schoolText = "CMS"
-            largeSizeText = ("\(dish.schools["CMSLarge"]!.count) Larges")
-            mediumSizeText = ("\(dish.schools["CMSMedium"]!.count) Mediums")
+            largeSizeText = ("\(dish.schools["CMSLarge"]!.count) L")
+            mediumSizeText = ("\(dish.schools["CMSMedium"]!.count) M")
         case 2:
             //  HHS Section
             schoolText = "HHS"
-            largeSizeText = ("\(dish.schools["HHSLarge"]!.count) Larges")
-            mediumSizeText = ("\(dish.schools["HHSMedium"]!.count) Mediums")
+            largeSizeText = ("\(dish.schools["HHSLarge"]!.count) L")
+            mediumSizeText = ("\(dish.schools["HHSMedium"]!.count) M")
         case 3:
             // Hyde Section
             schoolText = "Hyde"
-            largeSizeText = ("\(dish.schools["HydeLarge"]!.count) Larges")
-            mediumSizeText = ("\(dish.schools["HydeMedium"]!.count) Mediums")
+            largeSizeText = ("\(dish.schools["HydeLarge"]!.count) L")
+            mediumSizeText = ("\(dish.schools["HydeMedium"]!.count) M")
         case 4:
             // Lynbrook Section
             schoolText = "Lynbrook"
-            largeSizeText = ("\(dish.schools["LynbrookLarge"]!.count) Larges")
-            mediumSizeText = ("\(dish.schools["LynbrookMedium"]!.count) Mediums")
+            largeSizeText = ("\(dish.schools["LynbrookLarge"]!.count) L")
+            mediumSizeText = ("\(dish.schools["LynbrookMedium"]!.count) M")
         case 5:
             // MVHS Section
             schoolText = "MVHS"
-            largeSizeText = ("\(dish.schools["MVHSLarge"]!.count) Larges")
-            mediumSizeText = ("\(dish.schools["MVHSMedium"]!.count) Mediums")
+            largeSizeText = ("\(dish.schools["MVHSLarge"]!.count) L")
+            mediumSizeText = ("\(dish.schools["MVHSMedium"]!.count) M")
         default:
             // Miller Section
             schoolText = "Miller"
-            largeSizeText = ("\(dish.schools["MillerLarge"]!.count) Larges")
-            mediumSizeText = ("\(dish.schools["MillerMedium"]!.count) Mediums")
+            largeSizeText = ("\(dish.schools["MillerLarge"]!.count) L")
+            mediumSizeText = ("\(dish.schools["MillerMedium"]!.count) M")
         }
         
         cell.schoolNameLabel.text = schoolText

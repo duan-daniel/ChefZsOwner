@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseFirestore
+import TextFieldEffects
 
 class UpdateDishViewController: UIViewController, UITextFieldDelegate {
     
@@ -20,9 +21,9 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
     var db: Firestore!
     
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var dateTextField: HoshiTextField!
     @IBOutlet weak var dishNameLabel: UILabel!
-    @IBOutlet weak var dishNameTextField: UITextField!
+    @IBOutlet weak var dishNameTextField: HoshiTextField!
     @IBOutlet weak var updateButton: UIButton!
     let datePicker = UIDatePicker()
     
@@ -61,6 +62,7 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
         
         dateTextField.text = dish.date
         dishNameTextField.text = dish.name
+        updateButton.layer.cornerRadius = 20
     }
     
     func createDatePicker() {
