@@ -20,6 +20,9 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
     // Firestore reference
     var db: Firestore!
     
+    // date formatter
+    let dateFormatter = DateFormatter()
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var dateTextField: HoshiTextField!
     @IBOutlet weak var dishNameLabel: UILabel!
@@ -37,12 +40,27 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
     
     func setUpViews() {
         
-        // creates date picker and toolbar
-        createDatePicker()
+        // creates toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneClicked))
+        toolbar.setItems([flexibleSpace, doneButton], animated: true)
+        //        dateTextField.inputAccessoryView = toolbar
+        dishNameTextField.inputAccessoryView = toolbar
+        
+        // date picker
+        datePicker.datePickerMode = .date
+        dateTextField.inputView = datePicker
+        datePicker.addTarget(self, action: #selector(dateChanged(datePicker:)), for: .valueChanged)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped(gestureRecognizer:)))
+        view.addGestureRecognizer(tapGesture)
+        
         
         // disables buttons until text fields are filled in
-        configureTextFields()
-        updateTextFields()
+//        configureTextFields()
+//        updateTextFields()
         
         // sets navigation title
         switch sectionIndex {
@@ -65,18 +83,16 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
         updateButton.layer.cornerRadius = 20
     }
     
-    func createDatePicker() {
-        datePicker.datePickerMode = .date
-        dateTextField.inputView = datePicker
-        
-        // Add done button to keyboard
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneClicked))
-        toolbar.setItems([flexibleSpace, doneButton], animated: true)
-        dateTextField.inputAccessoryView = toolbar
-        dishNameTextField.inputAccessoryView = toolbar
+    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    @objc func dateChanged(datePicker: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateTextField.text = dateFormatter.string(from: datePicker.date)
+        view.endEditing(true)
     }
     
     func configureTextFields() {
@@ -107,11 +123,7 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func doneClicked() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        
-        dateTextField.text = dateFormatter.string(from: datePicker.date)
+//        dateTextField.text = dateFormatter.string(from: datePicker.date)
         view.endEditing(true)
     }
     
@@ -137,24 +149,41 @@ class UpdateDishViewController: UIViewController, UITextFieldDelegate {
         let dishName = dishNameTextField.text!
         let date = dateTextField.text!
         var schools = [String: [String]]()
-        schools = ["CMSMedium": [],
+        schools = ["CMSSmall": [],
+                   "CMSMedium": [],
                    "CMSLarge": [],
+                   "MillerSmall": [],
                    "MillerMedium": [],
                    "MillerLarge": [],
+                   "MVHSSmall": [],
                    "MVHSMedium": [],
                    "MVHSLarge": [],
+                   "LynbrookSmall":[],
                    "LynbrookMedium": [],
                    "LynbrookLarge": [],
+                   "CHSSmall":[],
                    "CHSMedium": [],
                    "CHSLarge": [],
+                   "HydeSmall": [],
                    "HydeMedium": [],
                    "HydeLarge": [],
+                   "HHSSmall": [],
                    "HHSMedium": [],
-                   "HHSLarge": []]
+                   "HHSLarge": [],
+                   "LawsonSmall": [],
+                   "LawsonMedium": [],
+                   "LawsonLarge": [],
+                   "KMSSmall": [],
+                   "KMSMedium": [],
+                   "KMSLarge": [],
+                   "SHSSmall": [],
+                   "SHSMedium": [],
+                   "SHSLarge": []
+                    ]
         
         
         // write to firebase
-        let newDish = Dish(name: dishName, date: date, id: documentName, totalCount: [], mediumCount: [], largeCount: [], schools: schools)
+        let newDish = Dish(name: dishName, date: date, id: documentName, totalCount: [], smallCount: [], mediumCount: [], largeCount: [], schools: schools)
         
         db.collection("foods").document(documentName).setData(newDish.dictionary) {
             error in

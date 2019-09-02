@@ -16,4 +16,7 @@ class ResponsesDetailedHeaderTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mediumSizeLabel: UILabel!
     
+    
+    @IBOutlet weak var smallSizeLabel: UILabel!
+    
 }

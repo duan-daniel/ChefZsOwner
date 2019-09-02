@@ -85,7 +85,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             }
             else {
                 Auth.auth().signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!)
-                self.performSegue(withIdentifier: "goToHomeFromSignUp", sender: self)
+                self.performSegue(withIdentifier: "goToMenuFromCreateAccount", sender: self)
             }
             
         }

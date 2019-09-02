@@ -38,7 +38,7 @@ class ResponsesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.rowHeight = 95
+        tableView.rowHeight = 105
         tableView.separatorStyle = .none
         
         self.query = baseQuery()
@@ -152,28 +152,31 @@ class ResponsesTableViewController: UITableViewController {
                 cell.dishNameLabel.text = dish.name
                 cell.largeCountLabel.text = "\(dish.largeCount.count) L"
                 cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
+                cell.smallCountLabel.text = "\(dish.smallCount.count) S"
             case 1:
                 let dish = tuesdayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
                 cell.largeCountLabel.text = "\(dish.largeCount.count) L"
                 cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
-
+                cell.smallCountLabel.text = "\(dish.smallCount.count) S"
             case 2:
                 let dish = wednesdayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
                 cell.largeCountLabel.text = "\(dish.largeCount.count) L"
                 cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
+                cell.smallCountLabel.text = "\(dish.smallCount.count) S"
             case 3:
                 let dish = thursdayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
                 cell.largeCountLabel.text = "\(dish.largeCount.count) L"
                 cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
+                cell.smallCountLabel.text = "\(dish.smallCount.count) S"
             default:
                 let dish = fridayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
                 cell.largeCountLabel.text = "\(dish.largeCount.count) L"
                 cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
-
+                cell.smallCountLabel.text = "\(dish.smallCount.count) S"
             }
         }
         

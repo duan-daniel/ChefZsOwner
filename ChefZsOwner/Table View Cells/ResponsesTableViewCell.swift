@@ -14,5 +14,6 @@ class ResponsesTableViewCell: UITableViewCell {
     @IBOutlet weak var dishNameLabel: UILabel!
     @IBOutlet weak var largeCountLabel: UILabel!
     @IBOutlet weak var mediumCountLabel: UILabel!
+    @IBOutlet weak var smallCountLabel: UILabel!
     
 }

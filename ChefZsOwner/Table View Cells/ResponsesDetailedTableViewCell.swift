@@ -12,4 +12,6 @@ class ResponsesDetailedTableViewCell: UITableViewCell {
     @IBOutlet weak var viewOfContent: UIView!
     @IBOutlet weak var childNameLabel: UILabel!
     @IBOutlet weak var sizeLabel: UILabel!
+    @IBOutlet weak var paymentMethodLabel: UILabel!
+    
 }
