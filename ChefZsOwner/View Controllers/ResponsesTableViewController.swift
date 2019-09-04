@@ -153,30 +153,40 @@ class ResponsesTableViewController: UITableViewController {
                 cell.largeCountLabel.text = "\(dish.largeCount.count) L"
                 cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
                 cell.smallCountLabel.text = "\(dish.smallCount.count) S"
+                cell.fruitCountLabel.text = "\(dish.fruitCount.count) F"
+                cell.waterCountLabel.text = "\(dish.waterCount.count) W"
             case 1:
                 let dish = tuesdayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
                 cell.largeCountLabel.text = "\(dish.largeCount.count) L"
                 cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
                 cell.smallCountLabel.text = "\(dish.smallCount.count) S"
+                cell.fruitCountLabel.text = "\(dish.fruitCount.count) F"
+                cell.waterCountLabel.text = "\(dish.waterCount.count) W"
             case 2:
                 let dish = wednesdayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
                 cell.largeCountLabel.text = "\(dish.largeCount.count) L"
                 cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
                 cell.smallCountLabel.text = "\(dish.smallCount.count) S"
+                cell.fruitCountLabel.text = "\(dish.fruitCount.count) F"
+                cell.waterCountLabel.text = "\(dish.waterCount.count) W"
             case 3:
                 let dish = thursdayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
                 cell.largeCountLabel.text = "\(dish.largeCount.count) L"
                 cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
                 cell.smallCountLabel.text = "\(dish.smallCount.count) S"
+                cell.fruitCountLabel.text = "\(dish.fruitCount.count) F"
+                cell.waterCountLabel.text = "\(dish.waterCount.count) W"
             default:
                 let dish = fridayDishArray[indexPath.row]
                 cell.dishNameLabel.text = dish.name
                 cell.largeCountLabel.text = "\(dish.largeCount.count) L"
                 cell.mediumCountLabel.text = "\(dish.mediumCount.count) M"
                 cell.smallCountLabel.text = "\(dish.smallCount.count) S"
+                cell.fruitCountLabel.text = "\(dish.fruitCount.count) F"
+                cell.waterCountLabel.text = "\(dish.waterCount.count) W"
             }
         }
         

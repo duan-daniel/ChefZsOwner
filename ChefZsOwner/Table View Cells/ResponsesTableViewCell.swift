@@ -15,5 +15,7 @@ class ResponsesTableViewCell: UITableViewCell {
     @IBOutlet weak var largeCountLabel: UILabel!
     @IBOutlet weak var mediumCountLabel: UILabel!
     @IBOutlet weak var smallCountLabel: UILabel!
+    @IBOutlet weak var fruitCountLabel: UILabel!
+    @IBOutlet weak var waterCountLabel: UILabel!
     
 }

@@ -113,6 +113,7 @@ class ResponsesDetailedTableViewController: UITableViewController {
             smallSizeText = ("\(dish.schools["KMSSmall"]!.count) S")
         default:
             // SHS Section
+            schoolText = "SHS"
             largeSizeText = ("\(dish.schools["SHSLarge"]!.count) L")
             mediumSizeText = ("\(dish.schools["SHSMedium"]!.count) M")
             smallSizeText = ("\(dish.schools["SHSSmall"]!.count) S")
